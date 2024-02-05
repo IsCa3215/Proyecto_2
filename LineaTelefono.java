@@ -42,13 +42,6 @@ public class LineaTelefono {
         if (!verificarNumero(numeroTelefono)) {
             throw new IllegalArgumentException("\u001B[31m"+"El número no es válido"+ "\u001B[0m");
         }
-
-        
-          //Tarifa pendiente
-          if (!verificarTarifa(tarifa)) {
-            throw new IllegalArgumentException("\u001B[31m"+"No cumple con una tarifa válida"+ "\u001B[0m");
-          }
-         
         //FIN COMPROBACIONES
 
         this.titular = titular;
@@ -127,6 +120,7 @@ public class LineaTelefono {
 
     private boolean verificarNif(String NIF) {
         // Añadir comprobación de NIF
+        boolean nif = NIF.matches("([^A-Z])([A-Z])$");
 
         return true;
     }
@@ -142,11 +136,11 @@ public class LineaTelefono {
 
     private boolean verificarNumero(String numero) {
         // Añadir comprobación de número tlf
-        return true;
-    }
-    private boolean verificarTarifa(TarifaTelefonica tarifa){
-    //Añadir comprobación de Tarifa
-    return true;
+        boolean verificar = false;
+        if (numero.charAt(0) == 9 || numero.charAt(0) == 8 || numero.charAt(0) == 6 || numero.charAt(0) == 7) {
+            verificar = true;
+        }
+        return verificar;
     }
     // FIN VERIFICACIONES
 
