@@ -13,7 +13,7 @@ public class Llamada {
      * @throws IllegalArgumentException Se produce cuando la duración de llamada no
      *                                  es válida
      */
-    public Llamada(double duracion, String destino) {
+    public Llamada(int duracion, String destino) {
         if (duracion <= 0) {
             throw new IllegalArgumentException("La duración de la llamada no es válida");
         }
@@ -48,7 +48,7 @@ public class Llamada {
         return fecha;
     }
 
-    public void setDuracion(double duracion) {
+    public void setDuracion(int duracion) {
         this.duracion = duracion;
     }
 
