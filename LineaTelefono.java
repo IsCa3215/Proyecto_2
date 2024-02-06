@@ -11,7 +11,6 @@ public class LineaTelefono {
 
     private TarifaTelefonica tarifa;
 
-    // private TarifaTelefonica tarifa;
 
     /* Constructor con parametros */
 
@@ -94,8 +93,13 @@ public class LineaTelefono {
      * @return true or false dependiendo si cumple o no los requisitos
      */
 
-    public static boolean comprobarNumeroTelefono(String numero){
+    public static TipoTelefono comprobarNumeroTelefono(String numero){
+        
+        if (numero.matches("[89][1-8][0-9]{7}")) {
+            return TipoTelefono.FIJO;
+        } else if(numero.matches("[67][1-9]//d{7}")) {
 
+        }
         return true;
     }
 
@@ -120,9 +124,11 @@ public class LineaTelefono {
 
     private boolean verificarNif(String NIF) {
         // Añadir comprobación de NIF
-        boolean nif = NIF.matches("([^A-Z])([A-Z])$");
+        boolean nif = NIF.matches("[0-9]{8}[A-Za-z]") || //NIF
+                        NIF.matches("[XYZ][0-9]{7}[A-Za-z]") || //NIE
+                        NIF.matches(""); //CIF
 
-        return true;
+        return nif;
     }
 
     private boolean verificarLimite(int limite) {
@@ -180,7 +186,7 @@ public class LineaTelefono {
     public void setLimite(int limite) {
         this.limite = limite;
     }
-    // public void setTarifa(int tarifa) {
-    // this.tarifa = tarifa;
-    // }
+    public void setTarifa(TarifaTelefonica tarifa) {
+    this.tarifa = tarifa;
+    }
 }
