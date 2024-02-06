@@ -8,6 +8,8 @@ public class AplicacionGestionTelefonica {
         System.out.println("Introduzca su nombre:");
         Scanner leer = new Scanner(System.in);
         String nombre = leer.next();
+        Llamada llamar = new Llamada(10,"a");
+        System.out.println(llamar);
         System.out.println("Gestión telefónica EDX, Bievenid@ " + nombre);
         while (!exit) {
             int Prog_1 = Funciones.leerIntValue("1. Crear nueva línea de teléfono" + "\n"
