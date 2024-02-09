@@ -8,11 +8,11 @@ public class AplicacionGestionTelefonica {
         boolean exit = false;
         boolean volver = false;
         System.out.println("Bienvenido a la gestión telefonica de edx");
-        System.out.println("Introduzca su nombre:");
         Scanner leer = new Scanner(System.in);
         String nombre = leer.next();
-        String[] lineas = 
         LineaTelefono linea1 = null;
+        LineaTelefono.comprobarNumeroTelefono("958323232");
+        
         linea1 = new LineaTelefono("wdwadwdadwdwadwd", "77559057K", "IsCa3215@", 12, "958323232",
                 TarifaTelefonica.NORMAL);
         // a.Llamar(10.00, "958323212");
@@ -46,7 +46,7 @@ public class AplicacionGestionTelefonica {
                         tarifaSelect2 = TarifaTelefonica.PREMIUM;
                     }
 
-                    lineas = new LineaTelefono(titular, NIF, passwd, limite, numero_tlf, tarifaSelect2);
+                    linea1 = new LineaTelefono(titular, NIF, passwd, limite, numero_tlf, tarifaSelect2);
                     System.out.println(linea1);
                     break;
                 case 2:

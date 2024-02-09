@@ -91,7 +91,7 @@ public class LineaTelefono {
         }
         for (int i = 0; i < llamadas_arr.length; i++) {
             if (llamadas_arr[i] == null) {
-                llamadas_arr[i] = {duracion, destino}
+                
             }
         }
         ;
