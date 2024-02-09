@@ -17,14 +17,16 @@ public class Llamada {
         if (duracion <= 0) {
             throw new IllegalArgumentException("La duración de la llamada no es válida");
         }
+        
         this.duracion = duracion;
         this.destino = destino;
     }
 
     @Override
     public String toString() {
-        return "Llamada [duracion: " + duracion + ", destino: " + destino + ", fecha: "
-                + formater.format(fecha.getTime()) + "]";
+        return "[Llamada realizada]"+"\n"+
+                "duracion: " + duracion +"\n"+ "destino: " + destino +"\n"+ ", fecha: "
+                + formater.format(fecha.getTime());
     }
     //CONSTRUCTOR COPIA
     public Llamada(Llamada ll) {
