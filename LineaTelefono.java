@@ -1,5 +1,7 @@
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 
 public class LineaTelefono {
     private String titular;
@@ -16,18 +18,21 @@ public class LineaTelefono {
 
     private TarifaTelefonica tarifa;
 
-    /* Constructor con parametros */
+ 
 
     /**
+     * Constructor con parametros
+     * Crea una línea de telefono nueva con varios parámetros
      * @see LineaTelefono() Constructor el cual crea una nueva línea de teléfono
-     * @param titular        STRING titular de la linea
+     * @param titular        STRING titular de la linea(mí 15 carácteres, max 80)
      * @param nif            STRING NIF, NIE, CIF del titular de la línea
      * @param password       STRING Contraseña para acceder a los servicios de la
-     *                       línea
-     * @param limite         INT Importe máximo que puede gastar en un mes
+     *                       línea(Debe contenter al menos: 1 MAY, 1MIN, 1car especial y 1 número)
+     * @param limite         INT Importe máximo que puede gastar en un mes(mínimo 10, máximo 5000)
      * @param numeroTelefono STRING Numero de teléfono asignado a la línea
      * @param tarifa         TarifaFunct Que tarifa tiene contratada la linea
-     *                       telefónica
+     *                       telefónica (BASICA, NORMAL o PREMIUM)
+     * @throws IllegalArgumentException Se lanza una excepción cuando uno de los parámetros no se han introducido correctamente
      */
 
     public LineaTelefono(String titular, String nif, String password, int limite, String numeroTelefono,
@@ -60,6 +65,7 @@ public class LineaTelefono {
         
     }
     /**
+     * El constructor copia de LineaTelefono()
      * @see LineaTelefono(LineaTelefono lt) Constructor copia
      * @param lt (La línea a la que se le va a hacer la copia)
      */
@@ -89,12 +95,11 @@ public class LineaTelefono {
         if (duracion <= 0) {
             throw new IllegalArgumentException("\u001B[31m" + "La duración de la llamada no es válida" + "\u001B[0m");
         }
-        for (int i = 0; i < llamadas_arr.length; i++) {
+        for (int i = 0; i < llamadas_arr.length || llamadas_arr[i] != null; i++) {
             if (llamadas_arr[i] == null) {
-                
-            }
+                llamadas_arr[i] = new Llamada(duracion, destino);
+            };
         }
-        ;
         comprobarNumeroTelefono(destino);
 
         calcularCosteLlamada(tarifa, comprobarNumeroTelefono(this.numeroTelefono), 12);
@@ -121,13 +126,13 @@ public class LineaTelefono {
             retorno = TipoTelefono.FIJO;
         } else if (numero.matches("[6][0-9]\\d{7}|[7][1234]\\d{7}")) {
             retorno = TipoTelefono.MOVIL;
-        } else if (numero.matches("[89][0][0]{6}")){
+        } else if (numero.matches("[89][0][0][0-9]{6}")){
             retorno = TipoTelefono.GRATUITO;
-        } else if (numero.matches("112[0]{2}")){
+        } else if (numero.matches("112|[0][0-9]{2}")){
             retorno = TipoTelefono.GRATUITO_ESPECIAL;
-        } else if (numero.matches("[89][0][57]{6}")){
+        } else if (numero.matches("[8][0][367][0-9]{6}|[9][0][57][0-9]{6}")){
             retorno = TipoTelefono.COSTE_ADICIONAL;
-        } else if (numero.matches("[9][0][12]{6}")) {
+        } else if (numero.matches("[9][0][12][0-9]{6}")) {
             retorno = TipoTelefono.COSTE_COMPARTIDO;
         }
         if (retorno == null) {
@@ -209,7 +214,7 @@ public class LineaTelefono {
         // Añadir comprobación de NIF
         boolean nif = NIF.matches("[0-9]{8}[A-Za-z]") || // NIF
                 NIF.matches("[XYZ][0-9]{7}[A-Za-z]") || // NIE
-                NIF.matches(""); // CIF
+                NIF.matches("[ABCDEFGHJPQRSUVNW][0-9]{7}[A-Za-z]"); // CIF
 
         return nif;
     }
@@ -265,6 +270,10 @@ public class LineaTelefono {
     }
     public TarifaTelefonica getTarifa() {
         return tarifa;
+    }
+    public Llamada[] getLlamadas_arr() {
+        System.out.println(Arrays.toString(this.llamadas_arr));
+        return llamadas_arr;
     }
     // Fin GETTERS
 

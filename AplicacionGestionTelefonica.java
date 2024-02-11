@@ -1,7 +1,5 @@
 import java.util.Scanner;
-import java.util.logging.Level;
-
-import javax.sound.sampled.Line;
+//7 PENDING CHANGES
 
 public class AplicacionGestionTelefonica {
     public static void main(String[] args) {
@@ -11,12 +9,15 @@ public class AplicacionGestionTelefonica {
         Scanner leer = new Scanner(System.in);
         String nombre = leer.next();
         LineaTelefono linea1 = null;
-        LineaTelefono.comprobarNumeroTelefono("958323232");
         
-        linea1 = new LineaTelefono("wdwadwdadwdwadwd", "77559057K", "IsCa3215@", 12, "958323232",
-                TarifaTelefonica.NORMAL);
+        System.out.println(LineaTelefono.comprobarNumeroTelefono("901323232"));
+        
+        linea1 = new LineaTelefono("wdwadwdadwdwadwd", "77559057K", "IsCa3215@", 12, "958323232", TarifaTelefonica.NORMAL);
         // a.Llamar(10.00, "958323212");
+        linea1.Llamar(12, "958323232");
+        
         Llamada llamar = new Llamada(10, "958323212");
+        linea1.getLlamadas_arr();
         System.out.println(linea1);
         System.out.println("Gestión telefónica EDX, Bievenid@ " + nombre);
         while (!exit) {
