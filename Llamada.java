@@ -8,11 +8,12 @@ public class Llamada {
     private SimpleDateFormat formater = new SimpleDateFormat("dd MMMMMMMMMMMMM yyyy HH:mm:ss");
 
     /**
+     * Constructor de la clase Llamada.
      * 
-     * @param duracion Duración de la Llamada
-     * @param destino  Destino de la llamada (número de teléfono)
-     * @throws IllegalArgumentException Se produce cuando la duración de llamada no
-     *                                  es válida
+     * @param duracion Duración de la llamada.
+     * @param destino  Destino de la llamada (número de teléfono).
+     * @throws IllegalArgumentException Se produce cuando la duración de la
+     *                                  llamada no es válida.
      */
     public Llamada(double duracion, String destino) {
         if (duracion <= 0) {
@@ -23,36 +24,62 @@ public class Llamada {
         this.destino = destino;
     }
 
-    @Override
-    public String toString() {
-        return "[Llamada realizada]"+"\n"+
-                "duracion: " + duracion +"\n"+ "destino: " + destino +"\n"+ ", fecha: "
-                + formater.format(fecha.getTime());
-    }
-    //CONSTRUCTOR COPIA
+    /**
+     * Constructor de copia de la clase Llamada.
+     * 
+     * @param ll Objeto Llamada a copiar.
+     */
     public Llamada(Llamada ll) {
         this.destino = ll.destino;
         this.duracion = ll.duracion;
-        this.fecha = ll.fecha;
-
+        this.fecha = (Calendar) ll.fecha.clone(); // Se crea una copia de la fecha para evitar modificar el original.
     }
 
-
-
+    /**
+     * Obtiene el destino de la llamada.
+     * 
+     * @return El destino de la llamada.
+     */
     public String getDestino() {
         return destino;
     }
 
+    /**
+     * Obtiene la duración de la llamada.
+     * 
+     * @return La duración de la llamada.
+     */
     public double getDuracion() {
         return duracion;
     }
 
+    /**
+     * Obtiene la fecha de la llamada.
+     * 
+     * @return La fecha de la llamada.
+     */
     public Calendar getFecha() {
         return fecha;
     }
 
-    public void setDuracion(int duracion) {
+    /**
+     * Establece la duración de la llamada.
+     * 
+     * @param duracion La duración de la llamada.
+     */
+    public void setDuracion(double duracion) {
+        if (duracion <= 0) {
+            throw new IllegalArgumentException("La duración de la llamada no es válida");
+        }
         this.duracion = duracion;
     }
 
+    /**
+     * Devuelve una representación en cadena de la llamada.
+     */
+    @Override
+    public String toString() {
+        return "[Llamada realizada]" + "\n" + "duracion: " + duracion + "\n" + "destino: " + destino + "\n"
+                + ", fecha: " + formater.format(fecha.getTime());
+    }
 }
